@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Rails Asset Pipeline | 辛帅锋的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="介绍什么是Asset PipelineAsset Pipeline是Rails用来合并，压缩，混淆css和js资源文件的框架 主要功能合并资源文件Asset Pipeline可以将多个资源文件(css, js)合并成一个文件。浏览器有请求并发数量限制，同时每个http请求建立断开链接也有一定开销，当单个页面引用的资源文件比较多时，这些限制和开销会造成页面加载时间变长。Asset Pipeline通">
+<meta name="keywords" content="Rails Asset Pipeline">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rails Asset Pipeline">
+<meta property="og:url" content="http://www.xinshuaifeng.com/2019/06/11/Rails-Asset-Pipeline/index.html">
+<meta property="og:site_name" content="辛帅锋的博客">
+<meta property="og:description" content="介绍什么是Asset PipelineAsset Pipeline是Rails用来合并，压缩，混淆css和js资源文件的框架 主要功能合并资源文件Asset Pipeline可以将多个资源文件(css, js)合并成一个文件。浏览器有请求并发数量限制，同时每个http请求建立断开链接也有一定开销，当单个页面引用的资源文件比较多时，这些限制和开销会造成页面加载时间变长。Asset Pipeline通">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-11T11:00:39.031Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rails Asset Pipeline">
+<meta name="twitter:description" content="介绍什么是Asset PipelineAsset Pipeline是Rails用来合并，压缩，混淆css和js资源文件的框架 主要功能合并资源文件Asset Pipeline可以将多个资源文件(css, js)合并成一个文件。浏览器有请求并发数量限制，同时每个http请求建立断开链接也有一定开销，当单个页面引用的资源文件比较多时，这些限制和开销会造成页面加载时间变长。Asset Pipeline通">
+  
+    <link rel="alternate" href="/atom.xml" title="辛帅锋的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">辛帅锋的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">技术分享</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.xinshuaifeng.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Rails-Asset-Pipeline" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/11/Rails-Asset-Pipeline/" class="article-date">
+  <time datetime="2019-06-11T10:42:59.000Z" itemprop="datePublished">2019-06-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Rails Asset Pipeline
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><h3 id="什么是Asset-Pipeline"><a href="#什么是Asset-Pipeline" class="headerlink" title="什么是Asset Pipeline"></a>什么是Asset Pipeline</h3><p>Asset Pipeline是Rails用来合并，压缩，混淆css和js资源文件的框架</p>
+<h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><h3 id="合并资源文件"><a href="#合并资源文件" class="headerlink" title="合并资源文件"></a>合并资源文件</h3><p>Asset Pipeline可以将多个资源文件(css, js)合并成一个文件。浏览器有请求并发数量限制，同时每个http请求建立断开链接也有一定开销，当单个页面引用的资源文件比较多时，这些限制和开销会造成页面加载时间变长。Asset Pipeline通过资源文件自动合并来减少浏览器http请求，间接减少页面加载时间。</p>
+<h3 id="文件压缩"><a href="#文件压缩" class="headerlink" title="文件压缩"></a>文件压缩</h3><p>css，js文件一般都包含很多空格，换行，注释，这些内容对浏览器来说没有任何用处，但是它们的存在一定程度上使资源文件变大，增加资源文件下载时间。</p>
+<p>由于js文件内容 Asset Pipeline同时会把js文件做内容混淆，通过修改变量、函数名称等方法使得js文件内容不可读，减小代码泄露的风险</p>
+<h3 id="生成文件唯一标识"><a href="#生成文件唯一标识" class="headerlink" title="生成文件唯一标识"></a>生成文件唯一标识</h3><p>基于文件内容给资源文件生成一个唯一的文件名，当文件内容有变动的时候，生成的文件名称也会修改，文件的唯一标识有以下好处</p>
+<ol>
+<li>对缓存友好，当文件内容有变动的时候不需要考虑浏览器旧的缓存</li>
+<li>可以同时保存多个文件版本，当多个服务器更新不同步的时候，不同的文件版本同时存在能保证多个服务器页面正常</li>
+</ol>
+<h3 id="兼容多种语言语法"><a href="#兼容多种语言语法" class="headerlink" title="兼容多种语言语法"></a>兼容多种语言语法</h3><p>支持sass, less语法写css文件，coffescript语法写js文件，同时支持erb写css和js, 无需手动转换，在资源编译阶段，自动转换</p>
+<h2 id="使用Asset-Pipeline"><a href="#使用Asset-Pipeline" class="headerlink" title="使用Asset Pipeline"></a>使用Asset Pipeline</h2><h3 id="配置编译文件"><a href="#配置编译文件" class="headerlink" title="配置编译文件"></a>配置编译文件</h3><p>在<code>config/initializers/assets.rb</code>文件中配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Rails.application.config.assets.precompile += %w( admin.js admin.css )</span><br></pre></td></tr></table></figure>
+
+<h3 id="定义资源文件"><a href="#定义资源文件" class="headerlink" title="定义资源文件"></a>定义资源文件</h3><h4 id="JavaScript文件"><a href="#JavaScript文件" class="headerlink" title="JavaScript文件"></a>JavaScript文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//= require jquery</span><br><span class="line">//= require jquery_ujs</span><br><span class="line">//= require jquery.Jcrop</span><br><span class="line">//= require bootstrap</span><br><span class="line">//= require_tree // 加载同目录下所有js文件</span><br></pre></td></tr></table></figure>
+
+<h4 id="css文件"><a href="#css文件" class="headerlink" title="css文件"></a>css文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">*= require bootstrap</span><br><span class="line">*= require_self // 加载自身css内容,用于调整合并后的文件内容顺序</span><br><span class="line">*= require_tree . // 加载同目录下所有css文件</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<h3 id="资源文件引入"><a href="#资源文件引入" class="headerlink" title="资源文件引入"></a>资源文件引入</h3><h4 id="javascript"><a href="#javascript" class="headerlink" title="javascript"></a>javascript</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= javascript_include_tag &apos;application&apos; %&gt;</span><br><span class="line">&lt;%= javascript_include_tag &apos;admin&apos; %&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="css"><a href="#css" class="headerlink" title="css"></a>css</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= stylesheet_link_tag &apos;application&apos; %&gt;</span><br><span class="line">&lt;%= stylesheet_link_tag &apos;admin&apos; %&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="image"><a href="#image" class="headerlink" title="image"></a>image</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= image_tag &apos;backgroud.png&apos; %&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="其它文件"><a href="#其它文件" class="headerlink" title="其它文件"></a>其它文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= asset_path &apos;backgroud.png&apos; %&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="css样式文件中应用"><a href="#css样式文件中应用" class="headerlink" title="css样式文件中应用"></a>css样式文件中应用</h4><p>如果css文件中需要使用背景图片，希望用到asset pipeline，可以在<code>.css.erb</code>文件中使用erb语法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.class &#123; background-image: url(&lt;%= asset_path &apos;backgroud.png&apos; %&gt;) &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件组织"><a href="#文件组织" class="headerlink" title="文件组织"></a>文件组织</h2><p>Asset Pipeline要求资源文件放在<code>app/assets</code>, <code>lib/asset</code>或者<code>vendor/assets</code>目录下，然后根据文件的不同类型放到<code>images</code>, <code>javascripts</code>, <code>stylesheets</code>目录下</p>
+<p>按照惯例</p>
+<ul>
+<li><code>app/assets</code> 存放应用独有的资源文件，比如自定义的图片样式和脚本</li>
+<li><code>lib/assets</code> 存放应用产生的，但是希望能够提取出来被其它应用使用的资源文件</li>
+<li><code>vendor/assets</code> 存放第三方插件使用到的资源文件</li>
+</ul>
+<h2 id="编译文件"><a href="#编译文件" class="headerlink" title="编译文件"></a>编译文件</h2><p>生产环境执行命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RAILS_ENV=production bin/rails assets:precompile</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.xinshuaifeng.com/2019/06/11/Rails-Asset-Pipeline/" data-id="cjwrpt84a0001g5n7rdn57p9w" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rails-Asset-Pipeline/">Rails Asset Pipeline</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/06/03/Rails加载中间件详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Rails加载中间件详解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/编辑器/">编辑器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Emacs/">Emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Middleware/">Middleware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails-Asset-Pipeline/">Rails Asset Pipeline</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/color-theme/">color-theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/el-get/">el-get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/railscast/">railscast</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/包管理/">包管理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Emacs/" style="font-size: 20px;">Emacs</a> <a href="/tags/Middleware/" style="font-size: 10px;">Middleware</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/Rails-Asset-Pipeline/" style="font-size: 10px;">Rails Asset Pipeline</a> <a href="/tags/color-theme/" style="font-size: 10px;">color-theme</a> <a href="/tags/el-get/" style="font-size: 10px;">el-get</a> <a href="/tags/railscast/" style="font-size: 10px;">railscast</a> <a href="/tags/包管理/" style="font-size: 10px;">包管理</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/11/Rails-Asset-Pipeline/">Rails Asset Pipeline</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/03/Rails加载中间件详解/">Rails加载中间件详解</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/16/Emacs配色方案/">Emacs配色方案</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/16/Emacs包管理器el-get/">Emacs包管理器el-get</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Kevin Xin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Emacs包管理器el-get | 辛帅锋的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="项目主页  Github el-get安装打开emacs初始化文件 123456789101112;; 包加载目录(add-to-list &amp;apos;load-path &amp;quot;~/.emacs.d/el-get/el-get&amp;quot;);; 检查安装el-get(unless (require &amp;apos;el-get nil &amp;apos;noerror)  (with-current-">
+<meta name="keywords" content="Emacs,包管理,el-get">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Emacs包管理器el-get">
+<meta property="og:url" content="http://www.xinshuaifeng.com/2016/03/16/Emacs包管理器el-get/index.html">
+<meta property="og:site_name" content="辛帅锋的博客">
+<meta property="og:description" content="项目主页  Github el-get安装打开emacs初始化文件 123456789101112;; 包加载目录(add-to-list &amp;apos;load-path &amp;quot;~/.emacs.d/el-get/el-get&amp;quot;);; 检查安装el-get(unless (require &amp;apos;el-get nil &amp;apos;noerror)  (with-current-">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2016-03-16T11:05:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Emacs包管理器el-get">
+<meta name="twitter:description" content="项目主页  Github el-get安装打开emacs初始化文件 123456789101112;; 包加载目录(add-to-list &amp;apos;load-path &amp;quot;~/.emacs.d/el-get/el-get&amp;quot;);; 检查安装el-get(unless (require &amp;apos;el-get nil &amp;apos;noerror)  (with-current-">
+  
+    <link rel="alternate" href="/atom.xml" title="辛帅锋的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">辛帅锋的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">技术分享</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.xinshuaifeng.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Emacs包管理器el-get" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/16/Emacs包管理器el-get/" class="article-date">
+  <time datetime="2016-03-16T02:10:36.000Z" itemprop="datePublished">2016-03-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编辑器/">编辑器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Emacs包管理器el-get
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="项目主页"><a href="#项目主页" class="headerlink" title="项目主页"></a>项目主页</h2><p>  <a href="https://github.com/dimitri/el-get" target="_blank" rel="noopener">Github</a></p>
+<h2 id="el-get安装"><a href="#el-get安装" class="headerlink" title="el-get安装"></a>el-get安装</h2><p>打开emacs初始化文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">;; 包加载目录</span><br><span class="line">(add-to-list &apos;load-path &quot;~/.emacs.d/el-get/el-get&quot;)</span><br><span class="line">;; 检查安装el-get</span><br><span class="line">(unless (require &apos;el-get nil &apos;noerror)</span><br><span class="line">  (with-current-buffer</span><br><span class="line">      (url-retrieve-synchronously</span><br><span class="line">       &quot;https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el&quot;)</span><br><span class="line">    (goto-char (point-max))</span><br><span class="line">    (eval-print-last-sexp)))</span><br><span class="line"></span><br><span class="line">(add-to-list &apos;el-get-recipe-path &quot;~/.emacs.d/el-get-user/recipes&quot;)</span><br><span class="line">(el-get &apos;sync)</span><br></pre></td></tr></table></figure>
+
+<p>把上述代码粘贴到初始化文件中，重新打开emacs或者C-x C-e执行代码，稍等片刻el-get即安装完成</p>
+<h2 id="包管理"><a href="#包管理" class="headerlink" title="包管理"></a>包管理</h2><p>使用<code>M-x el-get-list</code>命令打开可用包列表，搜索自己想使用的扩展包，移动光标到对应行，输入i标记安装，输入d标记卸载，输入x执行标记，同样是稍等片刻即刻安装或者卸载完成标记的包</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://www.xinshuaifeng.com/2016/03/16/Emacs包管理器el-get/" data-id="cjwrpt8460000g5n72m5u9a91" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Emacs/">Emacs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/el-get/">el-get</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/包管理/">包管理</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/16/Emacs配色方案/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Emacs配色方案
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/编辑器/">编辑器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Emacs/">Emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Middleware/">Middleware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails-Asset-Pipeline/">Rails Asset Pipeline</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/color-theme/">color-theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/el-get/">el-get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/railscast/">railscast</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/包管理/">包管理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Emacs/" style="font-size: 20px;">Emacs</a> <a href="/tags/Middleware/" style="font-size: 10px;">Middleware</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/Rails-Asset-Pipeline/" style="font-size: 10px;">Rails Asset Pipeline</a> <a href="/tags/color-theme/" style="font-size: 10px;">color-theme</a> <a href="/tags/el-get/" style="font-size: 10px;">el-get</a> <a href="/tags/railscast/" style="font-size: 10px;">railscast</a> <a href="/tags/包管理/" style="font-size: 10px;">包管理</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/11/Rails-Asset-Pipeline/">Rails Asset Pipeline</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/03/Rails加载中间件详解/">Rails加载中间件详解</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/16/Emacs配色方案/">Emacs配色方案</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/16/Emacs包管理器el-get/">Emacs包管理器el-get</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Kevin Xin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
