@@ -2,38 +2,38 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://www.xinshuaifeng.com</loc>
+        <loc>https://cwheart.github.io</loc>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
 
     <url>
-        <loc>http://www.xinshuaifeng.com/2019/06/11/Rails-Asset-Pipeline/</loc>
-        <lastmod>2019-06-11T11:00:39.031Z</lastmod>
+        <loc>https://cwheart.github.io/2016/03/16/Emacs%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8el-get/</loc>
+        <lastmod>2019-06-11T11:57:36.367Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>http://www.xinshuaifeng.com/2016/06/03/Rails%E5%8A%A0%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/</loc>
-        <lastmod>2016-06-03T15:59:18.000Z</lastmod>
+        <loc>https://cwheart.github.io/2016/03/16/Emacs%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88/</loc>
+        <lastmod>2019-06-11T11:57:10.465Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>http://www.xinshuaifeng.com/2016/03/16/Emacs%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88/</loc>
-        <lastmod>2016-03-16T11:26:54.000Z</lastmod>
+        <loc>https://cwheart.github.io/2016/06/03/Rails%E5%8A%A0%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/</loc>
+        <lastmod>2019-06-11T11:56:53.457Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>http://www.xinshuaifeng.com/2016/03/16/Emacs%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8el-get/</loc>
-        <lastmod>2016-03-16T11:05:28.000Z</lastmod>
+        <loc>https://cwheart.github.io/2019/06/11/Rails-Asset-Pipeline/</loc>
+        <lastmod>2019-06-11T11:56:15.980Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

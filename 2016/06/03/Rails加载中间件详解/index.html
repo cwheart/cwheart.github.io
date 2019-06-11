@@ -7,18 +7,18 @@
   
   <title>Rails加载中间件详解 | 辛帅锋的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Rails启动过程中加载了一系列的middleware(中间件) 查看加载的middleware列表1234567891011121314151617181920212223rake middlewareuse Rack::Sendfileuse Rack::Lockuse #&amp;lt;ActiveSupport::Cache::Strategy::LocalCache::Middleware:0x">
+  <meta name="description" content="Rails启动过程中加载了一系列的middleware(中间件) 查看加载的middleware列表">
 <meta name="keywords" content="Rails,Middleware">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Rails加载中间件详解">
-<meta property="og:url" content="http://www.xinshuaifeng.com/2016/06/03/Rails加载中间件详解/index.html">
+<meta property="og:url" content="https://cwheart.github.io/2016/06/03/Rails加载中间件详解/index.html">
 <meta property="og:site_name" content="辛帅锋的博客">
-<meta property="og:description" content="Rails启动过程中加载了一系列的middleware(中间件) 查看加载的middleware列表1234567891011121314151617181920212223rake middlewareuse Rack::Sendfileuse Rack::Lockuse #&amp;lt;ActiveSupport::Cache::Strategy::LocalCache::Middleware:0x">
+<meta property="og:description" content="Rails启动过程中加载了一系列的middleware(中间件) 查看加载的middleware列表">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2016-06-03T15:59:18.000Z">
+<meta property="og:updated_time" content="2019-06-11T11:56:53.457Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Rails加载中间件详解">
-<meta name="twitter:description" content="Rails启动过程中加载了一系列的middleware(中间件) 查看加载的middleware列表1234567891011121314151617181920212223rake middlewareuse Rack::Sendfileuse Rack::Lockuse #&amp;lt;ActiveSupport::Cache::Strategy::LocalCache::Middleware:0x">
+<meta name="twitter:description" content="Rails启动过程中加载了一系列的middleware(中间件) 查看加载的middleware列表">
   
     <link rel="alternate" href="/atom.xml" title="辛帅锋的博客" type="application/atom+xml">
   
@@ -63,7 +63,7 @@
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://www.xinshuaifeng.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cwheart.github.io"></form>
       </div>
     </div>
   </div>
@@ -92,7 +92,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Rails启动过程中加载了一系列的middleware(中间件)</p>
-<h3 id="查看加载的middleware列表"><a href="#查看加载的middleware列表" class="headerlink" title="查看加载的middleware列表"></a>查看加载的middleware列表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">rake middleware</span><br><span class="line"></span><br><span class="line">use Rack::Sendfile</span><br><span class="line">use Rack::Lock</span><br><span class="line">use #&lt;ActiveSupport::Cache::Strategy::LocalCache::Middleware:0x007fec4c51c210&gt;</span><br><span class="line">use Rack::Runtime</span><br><span class="line">use Rack::MethodOverride</span><br><span class="line">use ActionDispatch::RequestId</span><br><span class="line">use Rails::Rack::Logger</span><br><span class="line">use ActionDispatch::ShowExceptions</span><br><span class="line">use ActionDispatch::DebugExceptions</span><br><span class="line">use ActionDispatch::RemoteIp</span><br><span class="line">use ActionDispatch::Callbacks</span><br><span class="line">use ActiveRecord::ConnectionAdapters::ConnectionManagement</span><br><span class="line">use ActiveRecord::QueryCache</span><br><span class="line">use ActionDispatch::Cookies</span><br><span class="line">use ActionDispatch::Session::CookieStore</span><br><span class="line">use ActionDispatch::Flash</span><br><span class="line">use ActionDispatch::ParamsParser</span><br><span class="line">use Rack::Head</span><br><span class="line">use Rack::ConditionalGet</span><br><span class="line">use Rack::ETag</span><br><span class="line">run Blog::Application.routes</span><br></pre></td></tr></table></figure>
+<h3 id="查看加载的middleware列表"><a href="#查看加载的middleware列表" class="headerlink" title="查看加载的middleware列表"></a>查看加载的middleware列表</h3><a id="more"></a>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">rake middleware</span><br><span class="line"></span><br><span class="line">use Rack::Sendfile</span><br><span class="line">use Rack::Lock</span><br><span class="line">use #&lt;ActiveSupport::Cache::Strategy::LocalCache::Middleware:0x007fec4c51c210&gt;</span><br><span class="line">use Rack::Runtime</span><br><span class="line">use Rack::MethodOverride</span><br><span class="line">use ActionDispatch::RequestId</span><br><span class="line">use Rails::Rack::Logger</span><br><span class="line">use ActionDispatch::ShowExceptions</span><br><span class="line">use ActionDispatch::DebugExceptions</span><br><span class="line">use ActionDispatch::RemoteIp</span><br><span class="line">use ActionDispatch::Callbacks</span><br><span class="line">use ActiveRecord::ConnectionAdapters::ConnectionManagement</span><br><span class="line">use ActiveRecord::QueryCache</span><br><span class="line">use ActionDispatch::Cookies</span><br><span class="line">use ActionDispatch::Session::CookieStore</span><br><span class="line">use ActionDispatch::Flash</span><br><span class="line">use ActionDispatch::ParamsParser</span><br><span class="line">use Rack::Head</span><br><span class="line">use Rack::ConditionalGet</span><br><span class="line">use Rack::ETag</span><br><span class="line">run Blog::Application.routes</span><br></pre></td></tr></table></figure>
 
 <h3 id="自定义middleware"><a href="#自定义middleware" class="headerlink" title="自定义middleware"></a>自定义middleware</h3><h4 id="增加新的middleware"><a href="#增加新的middleware" class="headerlink" title="增加新的middleware"></a>增加新的middleware</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.middleware.use Magical::Unicorns</span><br></pre></td></tr></table></figure>
 
@@ -126,7 +128,7 @@ use Rack::ETag # 为所有字符串类型的主体添加 ETags 报头。ETags �
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://www.xinshuaifeng.com/2016/06/03/Rails加载中间件详解/" data-id="cjwrpt84h0005g5n7fyd2wz6g" class="article-share-link">Share</a>
+      <a data-url="https://cwheart.github.io/2016/06/03/Rails加载中间件详解/" data-id="cjwrr45kh0005qcn7xz2jizxf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Middleware/">Middleware</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rails/">Rails</a></li></ul>
