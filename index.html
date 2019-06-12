@@ -69,6 +69,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-mysql-InnoDB-锁机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/12/mysql-InnoDB-锁机制/" class="article-date">
+  <time datetime="2019-06-12T10:33:31.000Z" itemprop="datePublished">2019-06-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/12/mysql-InnoDB-锁机制/">mysql InnoDB 锁机制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="锁类型"><a href="#锁类型" class="headerlink" title="锁类型"></a>锁类型</h2><p>InnoDB使用的是行级锁，它的行锁有以下两种</p>
+<ul>
+<li>共享锁（S锁）</li>
+<li>排它锁（X锁）</li>
+</ul>
+<h2 id="共享锁"><a href="#共享锁" class="headerlink" title="共享锁"></a>共享锁</h2><p>共享锁又被称为读锁，对于加上共享锁的记录，只允许其它事务读取记录或者给改记录增加共享锁，不允许其它事务给改记录增加排它锁，由于InnoDB所有的修改删除操作都会自动增加排它锁，所以，当一个事务给记录加上共享锁以后其它事务就无法对记录做修改操作了。需要注意的是，如果一个事务T给一条记录增加了共享锁，如果没有其它事务同时给这条记录增加共享锁，事务T自己是可以对记录加排他锁来进行更新的</p>
+        
+          <p class="article-more-link">
+            <a href="/2019/06/12/mysql-InnoDB-锁机制/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.xinshuaifeng.com/2019/06/12/mysql-InnoDB-锁机制/" data-id="cjwt3mcgt0006q9n73h1wjnve" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/InnoDB/">InnoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mysql/">Mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/共享锁/">共享锁</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/排他锁/">排他锁</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Rails-Asset-Pipeline" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/11/Rails-Asset-Pipeline/" class="article-date">
@@ -105,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2019/06/11/Rails-Asset-Pipeline/" data-id="cjwsy1amm0004opn7m7gox7sh" class="article-share-link">Share</a>
+      <a data-url="https://www.xinshuaifeng.com/2019/06/11/Rails-Asset-Pipeline/" data-id="cjwt3mcgp0004q9n71tdtx6hk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Asset-Pipeline/">Asset Pipeline</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rails/">Rails</a></li></ul>
@@ -153,7 +205,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2016/06/03/Rails加载中间件详解/" data-id="cjwsy1amn0005opn7fiu47ezy" class="article-share-link">Share</a>
+      <a data-url="https://www.xinshuaifeng.com/2016/06/03/Rails加载中间件详解/" data-id="cjwt3mcgr0005q9n75mxg789t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Middleware/">Middleware</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rails/">Rails</a></li></ul>
@@ -197,7 +249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2016/03/16/Emacs配色方案/" data-id="cjwsy1ami0001opn7jkxojoxk" class="article-share-link">Share</a>
+      <a data-url="https://www.xinshuaifeng.com/2016/03/16/Emacs配色方案/" data-id="cjwt3mcgj0001q9n77u94q7ye" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Emacs/">Emacs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/color-theme/">color-theme</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/railscast/">railscast</a></li></ul>
@@ -245,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2016/03/16/Emacs包管理器el-get/" data-id="cjwsy1amd0000opn78gyezdh6" class="article-share-link">Share</a>
+      <a data-url="https://www.xinshuaifeng.com/2016/03/16/Emacs包管理器el-get/" data-id="cjwt3mcge0000q9n7koge6df4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Emacs/">Emacs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/el-get/">el-get</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/包管理/">包管理</a></li></ul>
@@ -267,7 +319,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Ruby-On-Rails/">Ruby On Rails</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编辑器/">编辑器</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Ruby-On-Rails/">Ruby On Rails</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编辑器/">编辑器</a></li></ul>
     </div>
   </div>
 
@@ -277,7 +329,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Asset-Pipeline/">Asset Pipeline</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Emacs/">Emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Middleware/">Middleware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/color-theme/">color-theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/el-get/">el-get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/railscast/">railscast</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/包管理/">包管理</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Asset-Pipeline/">Asset Pipeline</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Emacs/">Emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/InnoDB/">InnoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Middleware/">Middleware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/color-theme/">color-theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/el-get/">el-get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/railscast/">railscast</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/共享锁/">共享锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/包管理/">包管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排他锁/">排他锁</a></li></ul>
     </div>
   </div>
 
@@ -287,7 +339,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Asset-Pipeline/" style="font-size: 10px;">Asset Pipeline</a> <a href="/tags/Emacs/" style="font-size: 20px;">Emacs</a> <a href="/tags/Middleware/" style="font-size: 10px;">Middleware</a> <a href="/tags/Rails/" style="font-size: 20px;">Rails</a> <a href="/tags/color-theme/" style="font-size: 10px;">color-theme</a> <a href="/tags/el-get/" style="font-size: 10px;">el-get</a> <a href="/tags/railscast/" style="font-size: 10px;">railscast</a> <a href="/tags/包管理/" style="font-size: 10px;">包管理</a>
+      <a href="/tags/Asset-Pipeline/" style="font-size: 10px;">Asset Pipeline</a> <a href="/tags/Emacs/" style="font-size: 20px;">Emacs</a> <a href="/tags/InnoDB/" style="font-size: 10px;">InnoDB</a> <a href="/tags/Middleware/" style="font-size: 10px;">Middleware</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Rails/" style="font-size: 20px;">Rails</a> <a href="/tags/color-theme/" style="font-size: 10px;">color-theme</a> <a href="/tags/el-get/" style="font-size: 10px;">el-get</a> <a href="/tags/railscast/" style="font-size: 10px;">railscast</a> <a href="/tags/共享锁/" style="font-size: 10px;">共享锁</a> <a href="/tags/包管理/" style="font-size: 10px;">包管理</a> <a href="/tags/排他锁/" style="font-size: 10px;">排他锁</a>
     </div>
   </div>
 
@@ -307,6 +359,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/06/12/mysql-InnoDB-锁机制/">mysql InnoDB 锁机制</a>
+          </li>
         
           <li>
             <a href="/2019/06/11/Rails-Asset-Pipeline/">Rails Asset Pipeline</a>

@@ -3,6 +3,34 @@
 
 
     <url>
+        <loc>https://www.xinshuaifeng.com/tags/%E6%8E%92%E4%BB%96%E9%94%81/</loc>
+        <lastmod>2019-06-12T10:36:30.972Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.xinshuaifeng.com/tags/%E5%85%B1%E4%BA%AB%E9%94%81/</loc>
+        <lastmod>2019-06-12T10:36:30.972Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.xinshuaifeng.com/tags/InnoDB/</loc>
+        <lastmod>2019-06-12T10:36:30.972Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://www.xinshuaifeng.com/tags/Mysql/</loc>
+        <lastmod>2019-06-12T10:36:30.972Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://www.xinshuaifeng.com/tags/Middleware/</loc>
         <lastmod>2019-06-11T12:07:59.446Z</lastmod>
         <changefreq>weekly</changefreq>
