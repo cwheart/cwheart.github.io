@@ -77,57 +77,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/10/08/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-10-08T15:44:36.987Z" itemprop="datePublished">2021-10-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/10/08/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2021/10/08/hello-world/" data-id="ckuijr16q00092s1i2nfx2o1o" data-title="Hello World" class="article-share-link">分享</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-Golang的数组与切片" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/10/08/Golang%E7%9A%84%E6%95%B0%E7%BB%84%E4%B8%8E%E5%88%87%E7%89%87/" class="article-date">
@@ -155,34 +104,15 @@
 <h3 id="声明与创建"><a href="#声明与创建" class="headerlink" title="声明与创建"></a>声明与创建</h3><p>数组有三种声明方式</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr [5]int</span><br><span class="line">var arr = [5]int&#123;1,2,3,4,5&#125;</span><br><span class="line">arr := [...]int&#123;1,2,3,4&#125;</span><br></pre></td></tr></table></figure>
 <p>第三种声明方式本质上是一个语法糖，在编译阶段会自动推断数组的长度</p>
-<h3 id="数组的值复制"><a href="#数组的值复制" class="headerlink" title="数组的值复制"></a>数组的值复制</h3><p>区别于C以及大多数编程语言，Go语言中数组在赋值和函数调用过程中的参数传递都是值复制，这里需要特别注意，习惯了其它语言的引用类型的数组，在Go编程过程中很容易出现错误</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a1 := [3]int&#123;1,2,3&#125;</span><br><span class="line">a2 := a1</span><br><span class="line">a2[0] = 0</span><br><span class="line">// a1[0] is: 1, a2[0] is: 0</span><br><span class="line">fmt.Printf(&quot;a1[0] is: %d, a2[0] is: %d\n&quot;, a1[0], a2[0])</span><br></pre></td></tr></table></figure>
-
-<p>值复制有一定的资源开销，数组作为参数传递过程中，如果数组本身比较大，值复制会有性能问题，这个时候建议使用数组指针，或者其它方案代替</p>
-<h2 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h2><p>切片跟数组类似，但是切片提供了动态扩容的功能</p>
-<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> SliceHeader <span class="keyword">struct</span> &#123;</span><br><span class="line">	Data <span class="keyword">uintptr</span></span><br><span class="line">	Len <span class="keyword">int</span></span><br><span class="line">	Cap <span class="keyword">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>切片数据结构有三个字段，指向底层数组的指针，切片长度和切片容量。<br>切片在创建或者扩容过程中可以预留一部分空间用于添加新的元素，当容量不足时通过扩容的方式添加，切片长度记录了切片中实际存储的元素数量，容量标识当前底层数组最大能存储的元素数量</p>
-<h3 id="声明与创建-1"><a href="#声明与创建-1" class="headerlink" title="声明与创建"></a>声明与创建</h3><p>除了字面量创建切片外，还可以通过make函数创建切片，并指定长度和容量</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var arr []int</span><br><span class="line">var arr = []int&#123;1,2,3,4,5&#125;</span><br><span class="line">arr := make([]int, 10, 20)</span><br></pre></td></tr></table></figure>
-
-<p>可以通过内置函数len获取切片长度，cap获取切片的容量</p>
-<h3 id="切片的值复制"><a href="#切片的值复制" class="headerlink" title="切片的值复制"></a>切片的值复制</h3><p>跟数组一样，切片本身也是值复制，由于切片本身不存储数据，只是保存了一个数组指针，在切片被复制的时候，底层数组不会被复制，被复制的是数组指针</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s1 := []int&#123;1,2,3&#125;</span><br><span class="line">s2 := s1</span><br><span class="line">s2[0] = 0</span><br><span class="line">// s1[0] is: 0, s2[0] is: 0</span><br><span class="line">fmt.Printf(&quot;s1[0] is: %d, s2[0] is: %d\n&quot;, s1[0], s2[0])</span><br></pre></td></tr></table></figure>
-<p>复制指针要比复制数组元素简单的多，所以切片的复制比数组复制性能更好。</p>
-<p>如果希望完整的复制切片数据，避免共用底层数组结构，可以使用内置copy函数进行切片深度复制。</p>
-<h3 id="切片操作"><a href="#切片操作" class="headerlink" title="切片操作"></a>切片操作</h3><p>切片支持截取操作，截取后的切片长度和容量都会发生变化</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s1 := make([]int, 10, 20)</span><br><span class="line">s2 := s1[3:5]</span><br><span class="line">fmt.Printf(&quot;len: %d, cap: %d\n&quot;, len(s2), cap(s2)) // len: 2, cap: 17</span><br></pre></td></tr></table></figure>
-<p>截取后的切片长度跟截取的元素数量一直，容量截取起始位置一直到末尾<br>截取后的切片跟原始切片共用同一个底层数组结构，只是指针指向的地址不同</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s1 := make([]int, 10, 20)</span><br><span class="line">s2 := s1[3:5]</span><br><span class="line">s2[0] = 4</span><br><span class="line">fmt.Printf(&quot;s1[3]: %d, s2[0]: %d\n&quot;, s1[3], s2[0]) // s1[3]: 4, s2[0]: 4</span><br></pre></td></tr></table></figure>
-
-<h3 id="收缩与扩容"><a href="#收缩与扩容" class="headerlink" title="收缩与扩容"></a>收缩与扩容</h3><p>切片可以通过<code>append</code>操作添加元素，当切片有足够的容量添加元素时，切片只需要把元素放到第一个空闲位置即刻，不需要重新申请内容，当切片容量不足时，切片会重新申请一片内存区域，并把旧的元素通过内存复制的方式全部拷贝过来，新的内存区域会根据一定的规则预留出一部分容量以备新的元素加入</p>
-<p>切片的截取操作可以删除切片头部或者尾部的一个或多个元素，如果想删除中间位置的多个元素，可以通过先截取，然后append合并，这种方式既优雅又高效</p>
-<p>切片的元素删除并不会回收内存空间，使用过程中不要频繁的做头部删除操作，防止内存泄露</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2021/10/08/Golang%E7%9A%84%E6%95%B0%E7%BB%84%E4%B8%8E%E5%88%87%E7%89%87/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2021/10/08/Golang%E7%9A%84%E6%95%B0%E7%BB%84%E4%B8%8E%E5%88%87%E7%89%87/" data-id="ckuijr16n00042s1ih1wub9jz" data-title="Golang的数组与切片" class="article-share-link">分享</a>
+      <a data-url="https://www.xinshuaifeng.com/2021/10/08/Golang%E7%9A%84%E6%95%B0%E7%BB%84%E4%B8%8E%E5%88%87%E7%89%87/" data-id="ckuijyl8z00056m1i6d9ac4hb" data-title="Golang的数组与切片" class="article-share-link">分享</a>
       
       
       
@@ -236,7 +166,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2019/06/12/mysql-InnoDB-%E9%94%81%E6%9C%BA%E5%88%B6/" data-id="ckuijr16r000a2s1i7ldcc0ua" data-title="mysql InnoDB 锁机制" class="article-share-link">分享</a>
+      <a data-url="https://www.xinshuaifeng.com/2019/06/12/mysql-InnoDB-%E9%94%81%E6%9C%BA%E5%88%B6/" data-id="ckuijyl9b00136m1i6vo5bpvg" data-title="mysql InnoDB 锁机制" class="article-share-link">分享</a>
       
       
       
@@ -286,7 +216,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2019/06/11/Rails-Asset-Pipeline/" data-id="ckuijr16p00062s1ifebec3ia" data-title="Rails Asset Pipeline" class="article-share-link">分享</a>
+      <a data-url="https://www.xinshuaifeng.com/2019/06/11/Rails-Asset-Pipeline/" data-id="ckuijyl8x00036m1i5e5zddhr" data-title="Rails Asset Pipeline" class="article-share-link">分享</a>
       
       
       
@@ -336,7 +266,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2016/06/03/Rails%E5%8A%A0%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/" data-id="ckuijr16o00052s1ib8vygt5c" data-title="Rails加载中间件详解" class="article-share-link">分享</a>
+      <a data-url="https://www.xinshuaifeng.com/2016/06/03/Rails%E5%8A%A0%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/" data-id="ckuijyl9000066m1i9rke2v3x" data-title="Rails加载中间件详解" class="article-share-link">分享</a>
       
       
       
@@ -382,7 +312,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2016/03/16/Emacs%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88/" data-id="ckuijr16k00012s1ibkp73b5s" data-title="Emacs配色方案" class="article-share-link">分享</a>
+      <a data-url="https://www.xinshuaifeng.com/2016/03/16/Emacs%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88/" data-id="ckuijyl8o00006m1i30tm1r90" data-title="Emacs配色方案" class="article-share-link">分享</a>
       
       
       
@@ -432,7 +362,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2016/03/16/Emacs%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8el-get/" data-id="ckuijr16f00002s1iczsjg5qz" data-title="Emacs包管理器el-get" class="article-share-link">分享</a>
+      <a data-url="https://www.xinshuaifeng.com/2016/03/16/Emacs%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8el-get/" data-id="ckuijyl8t00016m1ic2jbbsds" data-title="Emacs包管理器el-get" class="article-share-link">分享</a>
       
       
       
@@ -498,10 +428,6 @@
       <ul>
         
           <li>
-            <a href="/2021/10/08/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
             <a href="/2021/10/08/Golang%E7%9A%84%E6%95%B0%E7%BB%84%E4%B8%8E%E5%88%87%E7%89%87/">Golang的数组与切片</a>
           </li>
         
@@ -515,6 +441,10 @@
         
           <li>
             <a href="/2016/06/03/Rails%E5%8A%A0%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/">Rails加载中间件详解</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/16/Emacs%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88/">Emacs配色方案</a>
           </li>
         
       </ul>
