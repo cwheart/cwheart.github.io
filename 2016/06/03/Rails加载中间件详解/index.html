@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Rails加载中间件详解 | 辛帅锋的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Rails启动过程中加载了一系列的middleware(中间件) 查看加载的middleware列表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rails加载中间件详解">
+<meta property="og:url" content="https://www.xinshuaifeng.com/2016/06/03/Rails%E5%8A%A0%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="辛帅锋的博客">
+<meta property="og:description" content="Rails启动过程中加载了一系列的middleware(中间件) 查看加载的middleware列表">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-06-03T14:53:12.000Z">
+<meta property="article:modified_time" content="2021-10-08T15:38:56.893Z">
+<meta property="article:author" content="Kevin Xin">
+<meta property="article:tag" content="Rails">
+<meta property="article:tag" content="Middleware">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="辛帅锋的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">辛帅锋的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">技术分享</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.xinshuaifeng.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Rails加载中间件详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/06/03/Rails%E5%8A%A0%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2016-06-03T14:53:12.000Z" itemprop="datePublished">2016-06-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Ruby-On-Rails/">Ruby On Rails</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Rails加载中间件详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Rails启动过程中加载了一系列的middleware(中间件)</p>
+<h3 id="查看加载的middleware列表"><a href="#查看加载的middleware列表" class="headerlink" title="查看加载的middleware列表"></a>查看加载的middleware列表</h3><span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">rake middleware</span><br><span class="line"></span><br><span class="line">use Rack::Sendfile</span><br><span class="line">use Rack::Lock</span><br><span class="line">use #&lt;ActiveSupport::Cache::Strategy::LocalCache::Middleware:0x007fec4c51c210&gt;</span><br><span class="line">use Rack::Runtime</span><br><span class="line">use Rack::MethodOverride</span><br><span class="line">use ActionDispatch::RequestId</span><br><span class="line">use Rails::Rack::Logger</span><br><span class="line">use ActionDispatch::ShowExceptions</span><br><span class="line">use ActionDispatch::DebugExceptions</span><br><span class="line">use ActionDispatch::RemoteIp</span><br><span class="line">use ActionDispatch::Callbacks</span><br><span class="line">use ActiveRecord::ConnectionAdapters::ConnectionManagement</span><br><span class="line">use ActiveRecord::QueryCache</span><br><span class="line">use ActionDispatch::Cookies</span><br><span class="line">use ActionDispatch::Session::CookieStore</span><br><span class="line">use ActionDispatch::Flash</span><br><span class="line">use ActionDispatch::ParamsParser</span><br><span class="line">use Rack::Head</span><br><span class="line">use Rack::ConditionalGet</span><br><span class="line">use Rack::ETag</span><br><span class="line">run Blog::Application.routes</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义middleware"><a href="#自定义middleware" class="headerlink" title="自定义middleware"></a>自定义middleware</h3><h4 id="增加新的middleware"><a href="#增加新的middleware" class="headerlink" title="增加新的middleware"></a>增加新的middleware</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.middleware.use Magical::Unicorns </span><br></pre></td></tr></table></figure>
+
+<h4 id="在指定的位置插入新的middleware"><a href="#在指定的位置插入新的middleware" class="headerlink" title="在指定的位置插入新的middleware"></a>在指定的位置插入新的middleware</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">config.middleware.insert_before Rack::Head, Magical::Unicorns</span><br><span class="line">config.middleware.swap ActionController::Failsafe, Lifo::Failsafe</span><br></pre></td></tr></table></figure>
+
+<h4 id="删除middleware"><a href="#删除middleware" class="headerlink" title="删除middleware"></a>删除middleware</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.middleware.delete Rack::MethodOverride</span><br></pre></td></tr></table></figure>
+
+<h4 id="替换middleware"><a href="#替换middleware" class="headerlink" title="替换middleware"></a>替换middleware</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config.middleware.swap ActionController::Failsafe, Lifo::Failsafe</span><br></pre></td></tr></table></figure>
+
+<h3 id="middleware用途"><a href="#middleware用途" class="headerlink" title="middleware用途"></a>middleware用途</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">use Rack::Sendfile # 设置服务器上的 X-Sendfile 报头</span><br><span class="line">use Rack::Lock # 用于多线程加锁，多线程模式下保证线程安全</span><br><span class="line">use #&lt;ActiveSupport::Cache::Strategy::LocalCache::Middleware:0x007fec4c51c210&gt; # 在内存中保存缓存</span><br><span class="line">use Rack::Runtime # 记录生成X-Runtime，用于客户端获取请求执行时间</span><br><span class="line">use Rack::MethodOverride # 通过客户端传递的_method参数实现了对PUT 和 DELETE 请求的支持</span><br><span class="line">use ActionDispatch::RequestId # 生成X-Request-Id头，返回给客户端，使客户端能够知道具体哪台机器的响应</span><br><span class="line">use Rails::Rack::Logger # 记录请求日志</span><br><span class="line">use ActionDispatch::ShowExceptions # 补救程序抛出的所有异常</span><br><span class="line">use ActionDispatch::DebugExceptions # 如果在本地开发，把异常写入日志，并显示一个调试页面</span><br><span class="line">use ActionDispatch::RemoteIp # 获取远程ip</span><br><span class="line">use ActionDispatch::Callbacks # 提供回调支持</span><br><span class="line">use ActiveRecord::ConnectionAdapters::ConnectionManagement # 请求结束以后清理没有回收的数据库连接</span><br><span class="line">use ActiveRecord::QueryCache # 启用ActiveRecord查询缓存</span><br><span class="line">use ActionDispatch::Cookies # 是应用支持cookies</span><br><span class="line">use ActionDispatch::Session::CookieStore # 支持session的cookie store</span><br><span class="line">use ActionDispatch::Flash # 支持闪现功能</span><br><span class="line">use ActionDispatch::ParamsParser # 把请求中的参数出入 params</span><br><span class="line">use Rack::Head # 把 HEAD 请求转换成 GET 请求，并处理</span><br><span class="line">use Rack::ConditionalGet # 添加对“条件 GET”的支持，如果页面未修改，就不响应</span><br><span class="line">use Rack::ETag # 为所有字符串类型的主体添加 ETags 报头。ETags 用来验证缓存</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.xinshuaifeng.com/2016/06/03/Rails%E5%8A%A0%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/" data-id="ckuijr16o00052s1ib8vygt5c" data-title="Rails加载中间件详解" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Middleware/" rel="tag">Middleware</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/11/Rails-Asset-Pipeline/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          Rails Asset Pipeline
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/16/Emacs%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Emacs配色方案</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Ruby-On-Rails/">Ruby On Rails</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E8%BE%91%E5%99%A8/">编辑器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Asset-Pipeline/" rel="tag">Asset Pipeline</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Emacs/" rel="tag">Emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/InnoDB/" rel="tag">InnoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Middleware/" rel="tag">Middleware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/color-theme/" rel="tag">color-theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/el-get/" rel="tag">el-get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/railscast/" rel="tag">railscast</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B1%E4%BA%AB%E9%94%81/" rel="tag">共享锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%87%E7%89%87/" rel="tag">切片</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" rel="tag">包管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E4%BB%96%E9%94%81/" rel="tag">排他锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Asset-Pipeline/" style="font-size: 10px;">Asset Pipeline</a> <a href="/tags/Emacs/" style="font-size: 20px;">Emacs</a> <a href="/tags/Golang/" style="font-size: 10px;">Golang</a> <a href="/tags/InnoDB/" style="font-size: 10px;">InnoDB</a> <a href="/tags/Middleware/" style="font-size: 10px;">Middleware</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Rails/" style="font-size: 20px;">Rails</a> <a href="/tags/color-theme/" style="font-size: 10px;">color-theme</a> <a href="/tags/el-get/" style="font-size: 10px;">el-get</a> <a href="/tags/railscast/" style="font-size: 10px;">railscast</a> <a href="/tags/%E5%85%B1%E4%BA%AB%E9%94%81/" style="font-size: 10px;">共享锁</a> <a href="/tags/%E5%88%87%E7%89%87/" style="font-size: 10px;">切片</a> <a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 10px;">包管理</a> <a href="/tags/%E6%8E%92%E4%BB%96%E9%94%81/" style="font-size: 10px;">排他锁</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">编程语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/10/08/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/08/Golang%E7%9A%84%E6%95%B0%E7%BB%84%E4%B8%8E%E5%88%87%E7%89%87/">Golang的数组与切片</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/12/mysql-InnoDB-%E9%94%81%E6%9C%BA%E5%88%B6/">mysql InnoDB 锁机制</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/11/Rails-Asset-Pipeline/">Rails Asset Pipeline</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/03/Rails%E5%8A%A0%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/">Rails加载中间件详解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Kevin Xin<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
