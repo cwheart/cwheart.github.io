@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Golang反射 | 辛帅锋的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="概述反射是指程序在运行时检查、修改自身结构和行为的能力，极大的能加了程序的灵活性，有的时候反射能大量的减少冗余代码。反射是把双刃剑，提供强大的扩展能力是以牺牲性能为代价的，同时反射会使程序的逻辑更为复杂，降低了代码的可读性，所以在使用反射的时候一定要慎重。 大多数高级编程语言都提供了反射的功能，Golang通过reflect包提供了简洁、高效的反射功能 reflect包Golang反射功能比较简单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang反射">
+<meta property="og:url" content="https://www.xinshuaifeng.com/2021/10/09/Golang%E5%8F%8D%E5%B0%84/index.html">
+<meta property="og:site_name" content="辛帅锋的博客">
+<meta property="og:description" content="概述反射是指程序在运行时检查、修改自身结构和行为的能力，极大的能加了程序的灵活性，有的时候反射能大量的减少冗余代码。反射是把双刃剑，提供强大的扩展能力是以牺牲性能为代价的，同时反射会使程序的逻辑更为复杂，降低了代码的可读性，所以在使用反射的时候一定要慎重。 大多数高级编程语言都提供了反射的功能，Golang通过reflect包提供了简洁、高效的反射功能 reflect包Golang反射功能比较简单">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-09T06:05:11.000Z">
+<meta property="article:modified_time" content="2021-10-09T16:35:48.536Z">
+<meta property="article:author" content="Kevin Xin">
+<meta property="article:tag" content="Golang">
+<meta property="article:tag" content="编程语言">
+<meta property="article:tag" content="反射">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="辛帅锋的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">辛帅锋的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">技术分享</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.xinshuaifeng.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Golang反射" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/10/09/Golang%E5%8F%8D%E5%B0%84/" class="article-date">
+  <time class="dt-published" datetime="2021-10-09T06:05:11.000Z" itemprop="datePublished">2021-10-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Golang反射
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>反射是指程序在运行时检查、修改自身结构和行为的能力，极大的能加了程序的灵活性，有的时候反射能大量的减少冗余代码。反射是把双刃剑，提供强大的扩展能力是以牺牲性能为代价的，同时反射会使程序的逻辑更为复杂，降低了代码的可读性，所以在使用反射的时候一定要慎重。</p>
+<p>大多数高级编程语言都提供了反射的功能，Golang通过reflect包提供了简洁、高效的反射功能</p>
+<h2 id="reflect包"><a href="#reflect包" class="headerlink" title="reflect包"></a>reflect包</h2><p>Golang反射功能比较简单，不支持从一个字符串来创建对象，所有的反射功能都是针对已有的对象，Golang反射功能把已有对象当做一个空<code>interface</code>，所有的反射操作都在空<code>interface</code>上。</p>
+<p>Golang的反射功能都封装在了<code>reflect</code>包中，该包提供了两个基本类型<code>reflect.Type</code>, <code>reflect.Value</code>，Golang的反射都是围绕这两个类型进行的。<code>reflect.Type</code>是一个<code>interface</code>，可以获取跟类型相关的信息。<code>reflect.Value</code>是一个结构体，包含了数据相关的信息，可以对<code>reflect.Value</code>进行修改，实现修改运行时数据的功能。</p>
+<p>另外该包还提供了两个基本的方法<code>reflect.TypeOf()</code>, <code>reflect.ValueOf()</code>来获取以上两个基本类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a := 1</span><br><span class="line">v := reflect.ValueOf(&amp;a) // 直接获取变量的`value` </span><br><span class="line">t := reflect.TypeOf(&amp;a) // 直接获取变量的`type`</span><br><span class="line">t = v.Type() // 通过`value`获取`type`</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="反射读取数据"><a href="#反射读取数据" class="headerlink" title="反射读取数据"></a>反射读取数据</h2><h3 id="获取类型相关信息"><a href="#获取类型相关信息" class="headerlink" title="获取类型相关信息"></a>获取类型相关信息</h3><p><code>reflect.Type</code>提供了对象类型相关的信息，读取类型相关信息只使用<code>reflect.Type</code>即可</p>
+<h4 id="获取变量类型"><a href="#获取变量类型" class="headerlink" title="获取变量类型"></a>获取变量类型</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 获取整数变量的类型</span><br><span class="line">a := 1</span><br><span class="line">t := reflect.TypeOf(a)</span><br><span class="line">fmt.Println(&quot;kind: &quot;, t.Kind()) // kind:  in </span><br></pre></td></tr></table></figure>
+<p>这里的<code>a</code>变量是已知类型，所以反射获取类型没有实际意义。在实际应用中我们的方法可能是一个通用的接口，当调用者传过来一个interface的时候这个反射将会非常的方便</p>
+<h4 id="获取struct的字段列表"><a href="#获取struct的字段列表" class="headerlink" title="获取struct的字段列表"></a>获取struct的字段列表</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">	&quot;reflect&quot;</span><br><span class="line">	&quot;strings&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">type User struct &#123;</span><br><span class="line">	Name string `json:&quot;name&quot;`</span><br><span class="line">	Age  uint32 `json:&quot;name;default:10&quot; validate:&quot;number&quot;`</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	u := User&#123;&#125;</span><br><span class="line">	t := reflect.TypeOf(u)</span><br><span class="line">	filedNames := []string&#123;&#125;</span><br><span class="line">	for i := 0; i &lt; t.NumField(); i++ &#123;</span><br><span class="line">		filedNames = append(filedNames, t.Field(i).Name)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(strings.Join(filedNames, &quot;,&quot;)) // Name,Age</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="获取struct的标签"><a href="#获取struct的标签" class="headerlink" title="获取struct的标签"></a>获取struct的标签</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">	&quot;reflect&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">type User struct &#123;</span><br><span class="line">	Name string `json:&quot;name&quot;`</span><br><span class="line">	Age  uint32 `json:&quot;name;default:10&quot; validate:&quot;number&quot;`</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	u := User&#123;&#125;</span><br><span class="line">	t := reflect.TypeOf(u)</span><br><span class="line">	field, _ := t.FieldByName(&quot;Age&quot;)</span><br><span class="line">	fmt.Println(field.Tag)             // json:&quot;name;default:10&quot; validate:&quot;number&quot;</span><br><span class="line">	fmt.Println(field.Tag.Get(&quot;json&quot;)) // name;default:10</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取struct的方法列表"><a href="#获取struct的方法列表" class="headerlink" title="获取struct的方法列表"></a>获取struct的方法列表</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">	&quot;reflect&quot;</span><br><span class="line">	&quot;strings&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">type User struct &#123;</span><br><span class="line">	Name string `json:&quot;name&quot;`</span><br><span class="line">	Age  uint32 `json:&quot;name;default:10&quot; validate:&quot;number&quot;`</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (u User) Say() &#123;</span><br><span class="line">	fmt.Printf(&quot;I am %s\n&quot;, u.Name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	u := User&#123;&#125;</span><br><span class="line">	t := reflect.TypeOf(u)</span><br><span class="line">	methodNames := []string&#123;&#125;</span><br><span class="line"></span><br><span class="line">	for i := 0; i &lt; t.NumMethod(); i++ &#123;</span><br><span class="line">		methodNames = append(methodNames, t.Method(i).Name)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(strings.Join(methodNames, &quot;,&quot;)) // Say</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="检测struct是否支持某个方法"><a href="#检测struct是否支持某个方法" class="headerlink" title="检测struct是否支持某个方法"></a>检测struct是否支持某个方法</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">type User struct &#123;</span><br><span class="line">	Name string `json:&quot;name&quot;`</span><br><span class="line">	Age  uint32 `json:&quot;name;default:10&quot; validate:&quot;number&quot;`</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type Fish struct &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (u Fish) TableName() string &#123;</span><br><span class="line">	return &quot;fishes&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	u := User&#123;&#125;</span><br><span class="line">	f := Fish&#123;&#125;</span><br><span class="line">	t := reflect.TypeOf(u)</span><br><span class="line">	_, ok := t.MethodByName(&quot;TableName&quot;)</span><br><span class="line">	fmt.Printf(&quot;Is User has TableName: %v\n&quot;, ok) // Is User has TableName: false</span><br><span class="line"></span><br><span class="line">	t = reflect.TypeOf(f)</span><br><span class="line">	_, ok = t.MethodByName(&quot;TableName&quot;)</span><br><span class="line">	fmt.Printf(&quot;Is Finsh has TableName: %v\n&quot;, ok) // Is Finsh has TableName: true</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还有一种比较优雅的方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">type User struct &#123;</span><br><span class="line">	Name string `json:&quot;name&quot;`</span><br><span class="line">	Age  uint32 `json:&quot;name;default:10&quot; validate:&quot;number&quot;`</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type tabler interface &#123;</span><br><span class="line">	TableName() string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	u := User&#123;&#125;</span><br><span class="line">	v := reflect.ValueOf(u)</span><br><span class="line">	_, ok := v.Interface().(tabler)</span><br><span class="line">	fmt.Printf(&quot;Is User has TableName: %v\n&quot;, ok) // Is User has TableName: fal</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种方式用到了<code>reflect.Value</code>的功能，可以一次性检测多个方法，检测到方法以后可以直接调用，<code>gorm</code>读取自定义表名的时候也是用的这种方法</p>
+<h2 id="反射修改数据"><a href="#反射修改数据" class="headerlink" title="反射修改数据"></a>反射修改数据</h2><p>修改数据需要用到<code>reflect.Value</code>的功能，需要注意的是数据的修改必须使用指针操作，因为Golang的参数都是值传递，在参数传递过程中会复制一份新的数据，如果修改一个非指针的值并不会影响原有的变量，当然Golang会检查这个错误，当反射接口检测到要修改的变量是一个非指针的值程序会panic</p>
+<p>修改基本类型变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a := 123</span><br><span class="line">v := reflect.ValueOf(&amp;a)</span><br><span class="line">v.Elem().SetInt(456)</span><br><span class="line">fmt.Println(a) // 456</span><br></pre></td></tr></table></figure>
+
+<p>修改struct类型变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">type User struct &#123;</span><br><span class="line">	Name string `json:&quot;name&quot;`</span><br><span class="line">	Age  uint32 `json:&quot;name;default:10&quot; validate:&quot;number&quot;`</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	u := &amp;User&#123;&#125;</span><br><span class="line">	v := reflect.ValueOf(&amp;u)</span><br><span class="line">	v = v.Elem().Elem().FieldByName(&quot;Name&quot;)</span><br><span class="line">	v.SetString(&quot;Tom&quot;)</span><br><span class="line">	fmt.Println(u.Name) // Tom</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="动态方法调用"><a href="#动态方法调用" class="headerlink" title="动态方法调用"></a>动态方法调用</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">type Fish struct &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func (u Fish) TableName() string &#123;</span><br><span class="line">	return &quot;fishes&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	f := &amp;Fish&#123;&#125;</span><br><span class="line">	v := reflect.ValueOf(f)</span><br><span class="line">	m := v.Elem().MethodByName(&quot;TableName&quot;)</span><br><span class="line">	results := m.Call([]reflect.Value&#123;&#125;)</span><br><span class="line">	tableName, _ := results[0].Interface().(string)</span><br><span class="line">	fmt.Println(tableName) // fishes</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.xinshuaifeng.com/2021/10/09/Golang%E5%8F%8D%E5%B0%84/" data-id="ckuk0utta00002en70gc254pj" data-title="Golang反射" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8D%E5%B0%84/" rel="tag">反射</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/10/08/Golang%E7%9A%84%E6%95%B0%E7%BB%84%E4%B8%8E%E5%88%87%E7%89%87/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Golang的数组与切片</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Ruby-On-Rails/">Ruby On Rails</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E8%BE%91%E5%99%A8/">编辑器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Asset-Pipeline/" rel="tag">Asset Pipeline</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Emacs/" rel="tag">Emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/InnoDB/" rel="tag">InnoDB</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Middleware/" rel="tag">Middleware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mysql/" rel="tag">Mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rails/" rel="tag">Rails</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/color-theme/" rel="tag">color-theme</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/el-get/" rel="tag">el-get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/railscast/" rel="tag">railscast</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%85%B1%E4%BA%AB%E9%94%81/" rel="tag">共享锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%87%E7%89%87/" rel="tag">切片</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" rel="tag">包管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%B0%84/" rel="tag">反射</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E4%BB%96%E9%94%81/" rel="tag">排他锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Asset-Pipeline/" style="font-size: 10px;">Asset Pipeline</a> <a href="/tags/Emacs/" style="font-size: 20px;">Emacs</a> <a href="/tags/Golang/" style="font-size: 20px;">Golang</a> <a href="/tags/InnoDB/" style="font-size: 10px;">InnoDB</a> <a href="/tags/Middleware/" style="font-size: 10px;">Middleware</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Rails/" style="font-size: 20px;">Rails</a> <a href="/tags/color-theme/" style="font-size: 10px;">color-theme</a> <a href="/tags/el-get/" style="font-size: 10px;">el-get</a> <a href="/tags/railscast/" style="font-size: 10px;">railscast</a> <a href="/tags/%E5%85%B1%E4%BA%AB%E9%94%81/" style="font-size: 10px;">共享锁</a> <a href="/tags/%E5%88%87%E7%89%87/" style="font-size: 10px;">切片</a> <a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 10px;">包管理</a> <a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 10px;">反射</a> <a href="/tags/%E6%8E%92%E4%BB%96%E9%94%81/" style="font-size: 10px;">排他锁</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 20px;">编程语言</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/10/09/Golang%E5%8F%8D%E5%B0%84/">Golang反射</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/08/Golang%E7%9A%84%E6%95%B0%E7%BB%84%E4%B8%8E%E5%88%87%E7%89%87/">Golang的数组与切片</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/12/mysql-InnoDB-%E9%94%81%E6%9C%BA%E5%88%B6/">mysql InnoDB 锁机制</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/11/Rails-Asset-Pipeline/">Rails Asset Pipeline</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/03/Rails%E5%8A%A0%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/">Rails加载中间件详解</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Kevin Xin<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
