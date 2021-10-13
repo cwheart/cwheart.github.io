@@ -106,20 +106,19 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="项目主页"><a href="#项目主页" class="headerlink" title="项目主页"></a>项目主页</h2><p>  <a href="https://github.com/dimitri/el-get" target="_blank" rel="noopener">Github</a></p>
+        <h2 id="项目主页"><a href="#项目主页" class="headerlink" title="项目主页"></a>项目主页</h2><p>  <a target="_blank" rel="noopener" href="https://github.com/dimitri/el-get">Github</a></p>
 <h2 id="el-get安装"><a href="#el-get安装" class="headerlink" title="el-get安装"></a>el-get安装</h2><p>打开emacs初始化文件</p>
-<a id="more"></a>
+<span id="more"></span>
 
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">;; 包加载目录</span><br><span class="line">(add-to-list &apos;load-path &quot;~/.emacs.d/el-get/el-get&quot;)</span><br><span class="line">;; 检查安装el-get</span><br><span class="line">(unless (require &apos;el-get nil &apos;noerror)</span><br><span class="line">  (with-current-buffer</span><br><span class="line">      (url-retrieve-synchronously</span><br><span class="line">       &quot;https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el&quot;)</span><br><span class="line">    (goto-char (point-max))</span><br><span class="line">    (eval-print-last-sexp)))</span><br><span class="line"></span><br><span class="line">(add-to-list &apos;el-get-recipe-path &quot;~/.emacs.d/el-get-user/recipes&quot;)</span><br><span class="line">(el-get &apos;sync)</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">;; 包加载目录</span><br><span class="line">(add-to-list &#x27;load-path &quot;~/.emacs.d/el-get/el-get&quot;)</span><br><span class="line">;; 检查安装el-get</span><br><span class="line">(unless (require &#x27;el-get nil &#x27;noerror)</span><br><span class="line">  (with-current-buffer</span><br><span class="line">      (url-retrieve-synchronously</span><br><span class="line">       &quot;https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el&quot;)</span><br><span class="line">    (goto-char (point-max))</span><br><span class="line">    (eval-print-last-sexp)))</span><br><span class="line"></span><br><span class="line">(add-to-list &#x27;el-get-recipe-path &quot;~/.emacs.d/el-get-user/recipes&quot;)</span><br><span class="line">(el-get &#x27;sync)</span><br></pre></td></tr></table></figure>
 <p>把上述代码粘贴到初始化文件中，重新打开emacs或者C-x C-e执行代码，稍等片刻el-get即安装完成</p>
 <h2 id="包管理"><a href="#包管理" class="headerlink" title="包管理"></a>包管理</h2><p>使用<code>M-x el-get-list</code>命令打开可用包列表，搜索自己想使用的扩展包，移动光标到对应行，输入i标记安装，输入d标记卸载，输入x执行标记，同样是稍等片刻即刻安装或者卸载完成标记的包</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2016/03/16/Emacs%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8el-get/" data-id="cku5sj84500007mn7svxxc1db" data-title="Emacs包管理器el-get" class="article-share-link">分享</a>
+      <a data-url="https://www.xinshuaifeng.com/2016/03/16/Emacs%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8el-get/" data-id="ckup4yha00000bun75xdha320" data-title="Emacs包管理器el-get" class="article-share-link">分享</a>
       
       
       
