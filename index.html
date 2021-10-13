@@ -77,6 +77,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="golang-WaitGroup实现原理" class="h-entry article article-type-golang" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/10/12/WaitGroup%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2021-10-12T13:28:18.000Z" itemprop="datePublished">2021-10-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Golang/">Golang</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/10/12/WaitGroup%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">WaitGroup实现原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p><code>sync.WaitGroup</code> 是一个结构体类型，该类型对外只提供了三个方法, ,  <code>Add(delta int)</code>用来增加任务数量，<code>Done()</code>用来完成单个任务，<code>Wait()</code>用来等待所有任务完成，一共<code>Add</code>多少，<code>Wait</code>就需要等待多少次<code>Done</code>，在<code>Done</code>全部完成之前<code>Wait()</code>会阻塞当前线程。</p>
+        
+          <p class="article-more-link">
+            <a href="/2021/10/12/WaitGroup%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.xinshuaifeng.com/2021/10/12/WaitGroup%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" data-id="ckup4xhqz00002wn70hz89xj3" data-title="WaitGroup实现原理" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Golang/" rel="tag">Golang</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag">编程语言</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Golang反射" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/10/09/Golang%E5%8F%8D%E5%B0%84/" class="article-date">
@@ -117,7 +166,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2021/10/09/Golang%E5%8F%8D%E5%B0%84/" data-id="ckul67lig0004l4n77rgs9bvg" data-title="Golang反射" class="article-share-link">分享</a>
+      <a data-url="https://www.xinshuaifeng.com/2021/10/09/Golang%E5%8F%8D%E5%B0%84/" data-id="ckuje8b5a0008n4n7hwwfmiil" data-title="Golang反射" class="article-share-link">分享</a>
       
       
       
@@ -170,7 +219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2021/10/08/Golang%E7%9A%84%E6%95%B0%E7%BB%84%E4%B8%8E%E5%88%87%E7%89%87/" data-id="ckul67lih0005l4n7ep0fceho" data-title="Golang的数组与切片" class="article-share-link">分享</a>
+      <a data-url="https://www.xinshuaifeng.com/2021/10/08/Golang%E7%9A%84%E6%95%B0%E7%BB%84%E4%B8%8E%E5%88%87%E7%89%87/" data-id="ckuidpc0l0000n4n7uuelz4pz" data-title="Golang的数组与切片" class="article-share-link">分享</a>
       
       
       
@@ -224,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2019/06/12/mysql-InnoDB-%E9%94%81%E6%9C%BA%E5%88%B6/" data-id="ckul67liz001el4n7527e7uea" data-title="mysql InnoDB 锁机制" class="article-share-link">分享</a>
+      <a data-url="https://www.xinshuaifeng.com/2019/06/12/mysql-InnoDB-%E9%94%81%E6%9C%BA%E5%88%B6/" data-id="cku5sj84k00067mn762t5ll37" data-title="mysql InnoDB 锁机制" class="article-share-link">分享</a>
       
       
       
@@ -274,7 +323,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2019/06/11/Rails-Asset-Pipeline/" data-id="ckul67lij0006l4n78ze99azr" data-title="Rails Asset Pipeline" class="article-share-link">分享</a>
+      <a data-url="https://www.xinshuaifeng.com/2019/06/11/Rails-Asset-Pipeline/" data-id="cku5sj84g00047mn7ng0j3jed" data-title="Rails Asset Pipeline" class="article-share-link">分享</a>
       
       
       
@@ -324,7 +373,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2016/06/03/Rails%E5%8A%A0%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/" data-id="ckul67lil0009l4n79slm2nz8" data-title="Rails加载中间件详解" class="article-share-link">分享</a>
+      <a data-url="https://www.xinshuaifeng.com/2016/06/03/Rails%E5%8A%A0%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/" data-id="cku5sj84i00057mn7cslfr8zn" data-title="Rails加载中间件详解" class="article-share-link">分享</a>
       
       
       
@@ -361,7 +410,7 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <h2 id="安装color-theme"><a href="#安装color-theme" class="headerlink" title="安装color-theme"></a>安装color-theme</h2><p>使用el-get搜索安装color-theme; color-theme-railscasts。单独安装color-theme-railscasts貌似也会自动安装以来</p>
-<h2 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">;; editor theme</span><br><span class="line">(require &#x27;color-theme)</span><br><span class="line">(color-theme-initialize)</span><br><span class="line">(color-theme-railscasts)</span><br></pre></td></tr></table></figure>
+<h2 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">;; editor theme</span><br><span class="line">(require &apos;color-theme)</span><br><span class="line">(color-theme-initialize)</span><br><span class="line">(color-theme-railscasts)</span><br></pre></td></tr></table></figure>
         
           <p class="article-more-link">
             <a href="/2016/03/16/Emacs%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88/#more">Read More</a>
@@ -370,7 +419,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2016/03/16/Emacs%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88/" data-id="ckul67lic0001l4n7bp63885w" data-title="Emacs配色方案" class="article-share-link">分享</a>
+      <a data-url="https://www.xinshuaifeng.com/2016/03/16/Emacs%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88/" data-id="cku5sj84a00017mn79szpubn5" data-title="Emacs配色方案" class="article-share-link">分享</a>
       
       
       
@@ -410,7 +459,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="项目主页"><a href="#项目主页" class="headerlink" title="项目主页"></a>项目主页</h2><p>  <a target="_blank" rel="noopener" href="https://github.com/dimitri/el-get">Github</a></p>
+        <h2 id="项目主页"><a href="#项目主页" class="headerlink" title="项目主页"></a>项目主页</h2><p>  <a href="https://github.com/dimitri/el-get" target="_blank" rel="noopener">Github</a></p>
 <h2 id="el-get安装"><a href="#el-get安装" class="headerlink" title="el-get安装"></a>el-get安装</h2><p>打开emacs初始化文件</p>
         
           <p class="article-more-link">
@@ -420,7 +469,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.xinshuaifeng.com/2016/03/16/Emacs%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8el-get/" data-id="ckul67li60000l4n71l7d97yr" data-title="Emacs包管理器el-get" class="article-share-link">分享</a>
+      <a data-url="https://www.xinshuaifeng.com/2016/03/16/Emacs%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8el-get/" data-id="cku5sj84500007mn7svxxc1db" data-title="Emacs包管理器el-get" class="article-share-link">分享</a>
       
       
       
@@ -464,7 +513,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Asset-Pipeline/" style="font-size: 10px;">Asset Pipeline</a> <a href="/tags/Emacs/" style="font-size: 20px;">Emacs</a> <a href="/tags/Golang/" style="font-size: 20px;">Golang</a> <a href="/tags/InnoDB/" style="font-size: 10px;">InnoDB</a> <a href="/tags/Middleware/" style="font-size: 10px;">Middleware</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Rails/" style="font-size: 20px;">Rails</a> <a href="/tags/color-theme/" style="font-size: 10px;">color-theme</a> <a href="/tags/el-get/" style="font-size: 10px;">el-get</a> <a href="/tags/railscast/" style="font-size: 10px;">railscast</a> <a href="/tags/%E5%85%B1%E4%BA%AB%E9%94%81/" style="font-size: 10px;">共享锁</a> <a href="/tags/%E5%88%87%E7%89%87/" style="font-size: 10px;">切片</a> <a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 10px;">包管理</a> <a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 10px;">反射</a> <a href="/tags/%E6%8E%92%E4%BB%96%E9%94%81/" style="font-size: 10px;">排他锁</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 20px;">编程语言</a>
+      <a href="/tags/Asset-Pipeline/" style="font-size: 10px;">Asset Pipeline</a> <a href="/tags/Emacs/" style="font-size: 15px;">Emacs</a> <a href="/tags/Golang/" style="font-size: 20px;">Golang</a> <a href="/tags/InnoDB/" style="font-size: 10px;">InnoDB</a> <a href="/tags/Middleware/" style="font-size: 10px;">Middleware</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Rails/" style="font-size: 15px;">Rails</a> <a href="/tags/color-theme/" style="font-size: 10px;">color-theme</a> <a href="/tags/el-get/" style="font-size: 10px;">el-get</a> <a href="/tags/railscast/" style="font-size: 10px;">railscast</a> <a href="/tags/%E5%85%B1%E4%BA%AB%E9%94%81/" style="font-size: 10px;">共享锁</a> <a href="/tags/%E5%88%87%E7%89%87/" style="font-size: 10px;">切片</a> <a href="/tags/%E5%8C%85%E7%AE%A1%E7%90%86/" style="font-size: 10px;">包管理</a> <a href="/tags/%E5%8F%8D%E5%B0%84/" style="font-size: 10px;">反射</a> <a href="/tags/%E6%8E%92%E4%BB%96%E9%94%81/" style="font-size: 10px;">排他锁</a> <a href="/tags/%E6%95%B0%E7%BB%84/" style="font-size: 10px;">数组</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 20px;">编程语言</a>
     </div>
   </div>
 
@@ -486,6 +535,10 @@
       <ul>
         
           <li>
+            <a href="/2021/10/12/WaitGroup%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">WaitGroup实现原理</a>
+          </li>
+        
+          <li>
             <a href="/2021/10/09/Golang%E5%8F%8D%E5%B0%84/">Golang反射</a>
           </li>
         
@@ -499,10 +552,6 @@
         
           <li>
             <a href="/2019/06/11/Rails-Asset-Pipeline/">Rails Asset Pipeline</a>
-          </li>
-        
-          <li>
-            <a href="/2016/06/03/Rails%E5%8A%A0%E8%BD%BD%E4%B8%AD%E9%97%B4%E4%BB%B6%E8%AF%A6%E8%A7%A3/">Rails加载中间件详解</a>
           </li>
         
       </ul>
