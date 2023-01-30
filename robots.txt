@@ -10,5 +10,5 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: https://www.xinshuaifeng.com/sitemap.xml
-Sitemap: https://www.xinshuaifeng.com/baidusitemap.xml
+Sitemap: https://cwheart.github.io/sitemap.xml
+Sitemap: https://cwheart.github.io/baidusitemap.xml
