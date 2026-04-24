@@ -20,7 +20,7 @@
   <meta name="description" content="什么是内存对齐CPU在访问内存的时候，并不是一个字节一个字节读取，而是以字长（word size）为单位访问。32位CPU字长为4字节，64位CPU字长是8字节。32CPU访问内存的时候只能以4的倍数的内存开始地址读取。如果一个变量存储在跨字长的内存区域上，CPU就需要多次访问内存才能读取。 Golang为了尽量避免这种跨字长的内存访问，在内存分配时会做一次内存对齐。 内存对齐示例12345678">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Golang的内存对齐">
-<meta property="og:url" content="https://cwheart.github.io/2021/10/14/Golang%E7%9A%84%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/index.html">
+<meta property="og:url" content="https://www.shuaifeng.xin/2021/10/14/Golang%E7%9A%84%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/index.html">
 <meta property="og:site_name" content="辛帅锋的博客">
 <meta property="og:description" content="什么是内存对齐CPU在访问内存的时候，并不是一个字节一个字节读取，而是以字长（word size）为单位访问。32位CPU字长为4字节，64位CPU字长是8字节。32CPU访问内存的时候只能以4的倍数的内存开始地址读取。如果一个变量存储在跨字长的内存区域上，CPU就需要多次访问内存才能读取。 Golang为了尽量避免这种跨字长的内存访问，在内存分配时会做一次内存对齐。 内存对齐示例12345678">
 <meta property="og:locale" content="zh_CN">
@@ -49,10 +49,7 @@
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
   
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
-
-<meta name="generator" content="Hexo 8.1.1"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <body>
   <div id="container">
@@ -72,7 +69,7 @@
     </div>
     <div id="header-inner" class="inner">
       <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        <a id="main-nav-toggle" class="nav-icon"></a>
         
           <a class="main-nav-link" href="/">Home</a>
         
@@ -81,13 +78,12 @@
       </nav>
       <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
         
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://cwheart.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.shuaifeng.xin"></form>
       </div>
     </div>
   </div>
@@ -133,11 +129,11 @@
 <li>每个平台的编译器都有一个默认的对齐系数，对齐系数可以通过预编译命令#pragma pack(n)来修改</li>
 <li>结构体的成员变量对齐值等于成员变量大小和对齐系数较小的数 <code>value = min(size, n)</code></li>
 <li>结构体第一个成员变量偏移量是0, 后面的成员变量偏移量必须是成员变量对齐值的整数倍</li>
-<li>结构体本身的对齐值是成员变量对齐值的最大值</li>
+<li>结构体本身的对齐值是成员变量对齐值的最大值 </li>
 </ol>
 <p>我们再看一下上面的对齐示例</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">type Foo struct &#123;</span><br><span class="line">    a bool</span><br><span class="line">    b uint32</span><br><span class="line">    c uint32</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    f := Foo&#123;&#125;</span><br><span class="line">    fmt.Printf(&quot;Foo.a size: %d, align: %d, offset: %d\n&quot;, unsafe.Sizeof(f.a), unsafe.Alignof(f.a), unsafe.Offsetof(f.a))</span><br><span class="line">    fmt.Printf(&quot;Foo.b size: %d, align: %d, offset: %d\n&quot;, unsafe.Sizeof(f.b), unsafe.Alignof(f.b), unsafe.Offsetof(f.b))</span><br><span class="line">    fmt.Printf(&quot;Foo.c size: %d, align: %d, offset: %d\n&quot;, unsafe.Sizeof(f.c), unsafe.Alignof(f.c), unsafe.Offsetof(f.c))</span><br><span class="line">    fmt.Printf(&quot;Foo size: %d, align: %d\n&quot;, unsafe.Sizeof(f), unsafe.Alignof(f))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 输出</span><br><span class="line">Foo.a size: 1, align: 1, offset: 0</span><br><span class="line">Foo.b size: 4, align: 4, offset: 4</span><br><span class="line">Foo.c size: 4, align: 4, offset: 8</span><br><span class="line">Foo size: 12, align: 4</span><br></pre></td></tr></table></figure>
-<h2 id="空结构体对齐"><a href="#空结构体对齐" class="headerlink" title="空结构体对齐"></a>空结构体对齐</h2><p>在Golang中空结构体<code>struct{}</code>大小为0，不占用内存空间，理论上他不需要对齐，但是当空结构体是最后一个成员变量时也需要内存对齐，因为如果有指针指向该成员变量的话，空结构体也需要一个地址，CPU访问这个地址的时候也需要按字来访问</p>
+<h2 id="空结构体对齐"><a href="#空结构体对齐" class="headerlink" title="空结构体对齐"></a>空结构体对齐</h2><p>在Golang中空结构体<code>struct&#123;&#125;</code>大小为0，不占用内存空间，理论上他不需要对齐，但是当空结构体是最后一个成员变量时也需要内存对齐，因为如果有指针指向该成员变量的话，空结构体也需要一个地址，CPU访问这个地址的时候也需要按字来访问</p>
 <p>验证代码</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">type Foo struct &#123;</span><br><span class="line">    a uint64</span><br><span class="line">    b struct&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    f := Foo&#123;&#125;</span><br><span class="line">    fmt.Printf(&quot;Foo.a size: %d, align: %d\n&quot;, unsafe.Sizeof(f.a), unsafe.Alignof(f.a))</span><br><span class="line">    fmt.Printf(&quot;Foo.b size: %d, align: %d\n&quot;, unsafe.Sizeof(f.b), unsafe.Alignof(f.b))</span><br><span class="line">    fmt.Printf(&quot;Foo size: %d\n&quot;, unsafe.Sizeof(f))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Foo.a size: 8, align: 8</span><br><span class="line">Foo.b size: 0, align: 1</span><br><span class="line">Foo size: 16</span><br></pre></td></tr></table></figure>
 
@@ -145,7 +141,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://cwheart.github.io/2021/10/14/Golang%E7%9A%84%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/" data-id="cuidwtjDXnhOs6xCqSQs3GnLo" data-title="Golang的内存对齐" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://www.shuaifeng.xin/2021/10/14/Golang%E7%9A%84%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/" data-id="cmoca98h40004chfh5jmk1l8w" data-title="Golang的内存对齐" class="article-share-link">分享</a>
       
       
       
@@ -268,7 +264,7 @@
     
 
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+<script src="/js/jquery-3.4.1.min.js"></script>
 
 
 
